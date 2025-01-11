@@ -1,128 +1,93 @@
 ﻿@extends('layouts.app')
 
 @section('content_one')
-<div class="container">
-    <h2>Class and Subjects Management</h2>
-    <hr>
-
-    <!-- Combined Form: Class Details and Subjects -->
-    <div class="card">
-        <div class="card-header">Class and Subjects Details</div>
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Add New Class</h3>
+        </div>
         <div class="card-body">
-            <form action="{{ route('sclass.class_store') }}" method="POST">
+            <form action="{{ route('sclass.sclass_store') }}" method="POST">
                 @csrf
-
-                <!-- Class Details Section -->
-                <h5>Class Details</h5>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="class_name">Class Name</label>
-                        <input type="text" name="class_name" id="class_name" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="class_code">Class Code</label>
-                        <input type="text" name="class_code" id="class_code" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="start_from">Start From</label>
-                        <input type="date" name="start_from" id="start_from" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="duration">Duration (Months)</label>
-                        <input type="number" name="duration" id="duration" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="class_fee">Class Fee</label>
-                        <input type="number" name="class_fee" id="class_fee" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="class_teacher_name">Class Teacher Name</label>
-                        <input type="text" name="class_teacher_name" id="class_teacher_name" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="max_no_students">Max Number of Students</label>
-                        <input type="number" name="max_no_students" id="max_no_students" class="form-control" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="class_teacher_mobile_number">Class Teacher Mobile Number</label>
-                        <input type="text" name="class_teacher_mobile_number" id="class_teacher_mobile_number" class="form-control" required>
-                    </div>
-                </div>
-
-                <!-- Subjects Section -->
-                <h5 class="mt-4">Subjects</h5>
-                <div id="subjects-container">
-                    <div class="subject-row row mb-4">
-                        <div class="col-md-4">
-                            <label for="subject_name">Subject Name</label>
-                            <input type="text" name="subjects[0][subject_name]" class="form-control" required>
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="class_name_in_words" class="form-label">Class Name (Words):</label>
+                            <input type="text" id="class_name_in_words" name="class_name_in_words" class="form-control" placeholder="Enter class name in words" required>
                         </div>
-                        <div class="col-md-4">
-                            <label for="teacher_id">Select Teacher</label>
-                            <select name="subjects[0][teacher_id]" class="form-control" required>
-                                <option value="" selected disabled>Select Teacher</option>
+
+                        <div class="form-group mb-3">
+                            <label for="class_fee" class="form-label">Class Fee:</label>
+                            <input type="number" id="class_fee" name="class_fee" class="form-control" placeholder="Enter class fee" step="0.01" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="no_of_students" class="form-label">Number of Students:</label>
+                            <input type="number" id="no_of_students" name="no_of_students" class="form-control" placeholder="Enter maximum number of students" required>
+                        </div>
+
+                        <label for="class_teacher_last_name" class="form-label">Class Teacher Last Name:</label>
+                        <select id="class_teacher_last_name" name="class_teacher_last_name" class="form-control" required>
+                            <option value="" disabled selected>Select Last Name</option>
+                            @foreach($teachers as $teacher)
+                                <option value="{{ $teacher->last_name }}">{{ $teacher->last_name }}</option>
+                            @endforeach
+                        </select>
+
+                        {{-- <div class="form-group mb-3">
+                            <label for="class_teacher_last_name" class="form-label">Class Teacher Last Name:</label>
+                            <input type="text" id="class_teacher_last_name" name="class_teacher_last_name" class="form-control" placeholder="Enter last name" required>
+                        </div> --}}
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="class_name_in_number" class="form-label">Class Name (Number):</label>
+                            <input type="text" id="class_name_in_number" name="class_name_in_number" class="form-control" placeholder="Enter class name in number" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="class_code" class="form-label">Class Code:</label>
+                            <input type="text" id="class_code" name="class_code" class="form-control" placeholder="Enter class code" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="no_of_subject" class="form-label">Number of Subjects:</label>
+                            <input type="text" id="no_of_subject" name="no_of_subject" class="form-control" placeholder="Enter number of subjects" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="teacher_id" class="form-label">Class Teacher ID:And Mobile Number</label>
+                            <select id="teacher_id" name="teacher_id" class="form-control" required>
+                                <option value="" disabled selected>Select Teacher</option>
                                 @foreach($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }}</option>
+                                    <option value="{{ $teacher->id }}">{{ $teacher->id }} - {{ $teacher->mobile_number }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <label for="time">Time</label>
-                            <input type="time" name="subjects[0][time]" class="form-control" required>
-                        </div>
-                        <div class="col-md-1 d-flex align-items-center">
-                            <button type="button" class="btn btn-danger remove-subject">X</button>
+                    </div>
+                </div>
+
+                <!-- Full Width Row for Teacher Names -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="class_teacher_first_name" class="form-label">Class Teacher First Name:</label>
+                            <select id="class_teacher_first_name" name="class_teacher_first_name" class="form-control" required>
+                                <option value="" disabled selected>Select First Name</option>
+                                @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->first_name }}">{{ $teacher->first_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
-                <button type="button" id="add-subject" class="btn btn-success mb-3">+ Add Subject</button>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Save Class and Subjects</button>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    let subjectIndex = 1;
-
-    // Add new subject row
-    document.getElementById('add-subject').addEventListener('click', function () {
-        const container = document.getElementById('subjects-container');
-        const newRow = document.createElement('div');
-        newRow.classList.add('subject-row', 'row', 'mb-3');
-        newRow.innerHTML = `
-            <div class="col-md-4">
-                <label for="subject_name">Subject Name</label>
-                <input type="text" name="subjects[${subjectIndex}][subject_name]" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-                <label for="teacher_id">Select Teacher</label>
-                <select name="subjects[${subjectIndex}][teacher_id]" class="form-control" required>
-                    <option value="" selected disabled>Select Teacher</option>
-                    @foreach($teachers as $teacher)
-                        <option value="{{ $teacher->id }}">{{ $teacher->first_name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="time">Time</label>
-                <input type="time" name="subjects[${subjectIndex}][time]" class="form-control" required>
-            </div>
-            <div class="col-md-1 d-flex align-items-center">
-                <button type="button" class="btn btn-danger remove-subject">X</button>
-            </div>
-        `;
-        container.appendChild(newRow);
-        subjectIndex++;
-    });
-
-    // Remove subject row
-    document.getElementById('subjects-container').addEventListener('click', function (e) {
-        if (e.target.classList.contains('remove-subject')) {
-            e.target.closest('.subject-row').remove();
-        }
-    });
-</script>
 @endsection

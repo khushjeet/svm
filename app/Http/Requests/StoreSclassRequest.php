@@ -11,7 +11,7 @@ class StoreSclassRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,15 @@ class StoreSclassRequest extends FormRequest
     {
         return [
             //
+            'class_name_in_words' => 'required|string|max:255',
+            'class_name_in_number' => 'required|string|max:10',
+            'class_fee' => 'required|numeric',
+            'class_code' => 'required|string|max:10',
+            'no_of_students' => 'required|integer',
+            'no_of_subject' => 'required|string|max:255',
+            'teacher_id' => 'required|exists:teachers,id',
+            'class_teacher_first_name' => 'required|string|max:255',
+            'class_teacher_last_name' => 'required|string|max:255',
         ];
     }
 }

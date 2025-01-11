@@ -5,26 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Sclass;
 use App\Http\Requests\StoreSclassRequest;
 use App\Http\Requests\UpdateSclassRequest;
-use App\Models\Subject;
 use App\Models\Teacher;
-use Illuminate\Http\Request;
-use Mockery\Matcher\Subset;
+
 
 class SclassController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $teachers = Teacher::all();
-        $sclasses = Sclass::all();
-        $subjects = Subject::all();
-        return view('admin.sclass.all-courses'
-        ,compact('teachers'),
-        compact('sclasses'),
-        compact('subjects'));
+        $classes = Sclass::with('teacher')->get(); // Eager loading the teacher relationship
+        return view('admin.sclass.all-courses', compact('classes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,89 +23,77 @@ class SclassController extends Controller
     public function create()
     {
         $teachers = Teacher::all();
-         return view('admin.sclass.add-courses',compact('teachers'));
+        return view('admin.sclass.add-courses', compact('teachers'));
     }
-    public function storeClass(Request $request)
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreSclassRequest $request)
     {
-        $validatedClass = $request->validate([
-            'class_name' => 'required|string|max:255',
-            'class_code' => 'required|string|max:255',
-            'start_from' => 'required|date',
-            'duration' => 'required|integer',
-            'class_fee' => 'required|numeric',
-            'class_teacher_name' => 'required|string|max:255',
-            'max_no_students' => 'required|integer',
-            'class_teacher_mobile_number' => 'required|string|max:15',
-        ]);
+        // Validate and save the data using the request rules
+        $validated = $request->validated();
 
-        // Save class details
-        $class = Sclass::create($validatedClass);
+        // Save the data into the Sclass model
+        Sclass::create($validated);
 
-        // Validate and save subjects
-        if ($request->has('subjects')) {
-            $validatedSubjects = $request->validate([
-                'subjects' => 'required|array',
-                'subjects.*.subject_name' => 'required|string|max:255',
-                'subjects.*.teacher_id' => 'required|exists:teachers,id',
-                'subjects.*.time' => 'required',
-            ]);
-
-            foreach ($validatedSubjects['subjects'] as $subject) {
-                $subject['sclass_id'] = $class->id; // Link subject to the created class
-                Subject::create($subject);
-            }
-        }
-
-        return redirect()->route('dashboard')->with('success', 'Class and Subjects saved successfully!');
+        // Redirect back with a success message
+        return redirect()->route('sclass.sclass_index')->with('success', 'Class created successfully!');
     }
-
-
-public function storeSubjects(Request $request)
-{
-    $validated = $request->validate([
-        'subjects' => 'required|array',
-        'subjects.*.subject_name' => 'required|string|max:255',
-        'subjects.*.teacher_id' => 'required|exists:teachers,id',
-        'subjects.*.time' => 'required',
-    ]);
-
-    foreach ($validated['subjects'] as $subject) {
-        Subject::create($subject);
-    }
-
-    return redirect()->route('dashboard')->with('success', 'Subjects saved successfully!');
-}
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Sclass $sclass)
+    public function show(string $class)
+
+
     {
-        //
+        $sclass = Sclass::findOrFail($class);
+
+        return view('admin.sclass.edit-courses',compact('sclass'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sclass $sclass)
+    public function edit(string $class)
     {
-        //
+        $teachers = Teacher::all();
+        $sclass = Sclass::findOrFail($class);
+        return view('admin.sclass.edit-sclasses', compact('sclass', 'teachers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSclassRequest $request, Sclass $sclass)
+    public function update(UpdateSclassRequest $request, string $class)
     {
-        //
+                // Validate and save the data using the request rules
+               $sclass = Sclass::findOrFail($class);
+                $sclass->class_name_in_words = $request->class_name_in_words;
+                $sclass->class_fee = $request->class_fee;
+                $sclass->no_of_students = $request->no_of_students;
+                $sclass->class_name_in_number=$request->class_name_in_number;
+                $sclass->class_code=$request->class_code;
+                $sclass->no_of_subject=$request->no_of_subject;
+                $sclass->teacher_id=$request->teacher_id;
+                $sclass->class_teacher_first_name = $request->class_teacher_first_name;
+                $sclass->class_teacher_last_name = $request->class_teacher_last_name;
+                $sclass->save();
+        return redirect()->route('sclass.sclass_index')->with('success', 'Class updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sclass $sclass)
+    public function destroy(string $class)
+
     {
-        //
+        $sclass = Sclass::findOrFail($class);
+        $sclass->delete();
+
+
+        return redirect()->route('sclass.sclass_index')->with('success', 'Class deleted successfully!');
     }
 }

@@ -9,19 +9,23 @@ class Sclass extends Model
 {
     /** @use HasFactory<\Database\Factories\SclassFactory> */
     use HasFactory;
-    protected $fillable = [
-        'class_name',
-        'class_code',
-        'start_from',
-        'duration',
-        'class_fee',
-        'class_teacher_name',
-        'max_no_students',
-        'class_teacher_mobile_number',
-    ];
 
+    protected $fillable = [
+        'class_name_in_words',
+        'class_name_in_number',
+        'class_fee',
+        'class_code',
+        'no_of_students',
+        'no_of_subject',
+        'teacher_id',
+        'class_teacher_first_name',
+        'class_teacher_last_name',
+
+    ];
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'class_teacher_name', 'name');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
+    
+
 }

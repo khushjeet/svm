@@ -137,11 +137,12 @@
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-graduation-cap"></i>
-                            <span class="nav-text">Classes</span>
+                            <span class="nav-text">Manage Classes</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('sclass.sclass_index')}}">View All Class</a></li>
                             <li><a href="{{route('sclass.sclass_create')}}">Add New Class</a></li>
+                            <li><a href="">Add Time Table</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -166,7 +167,6 @@
                         </ul>
                     </li>
                 </ul>
-
             </div>
         </div>
         <!--**********************************
@@ -649,8 +649,11 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">Dexignlab</a> 2020
-                </p>
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    Developed by
+                    <a href="https://iictonline.com/">
+                    IICT </a>(khushjeet). All Right Reserved (2025)
+                </div>
             </div>
         </div>
         <!--**********************************

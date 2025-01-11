@@ -56,17 +56,34 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Route::put('/teacher/{id}/update',[TeacherController::class,'update'])->name('teacher.update');
-
 Route::middleware('auth')->group(function () {
     Route::controller(SclassController::class)->name('sclass.')->group(function () {
+        // Index route: display all classes
         Route::get('/sclass_index', 'index')->name('sclass_index');
+
+        // Create route: show the form to create a new class
         Route::get('/sclass_create', 'create')->name('sclass_create');
-        Route::get('/sclass_show', 'show')->name('sclass_show');
-        Route::post('/classes', 'storeClass')->name('class_store');
-        Route::post('/subjects', 'storeSubjects')->name('subject_store');
+
+        // Store route: handle form submission to create a new class
+        Route::post('/classes', 'store')->name('sclass_store');
+
+        // Show route: display details of a specific class
+        Route::get('/sclass_show/{sclass}', 'show')->name('sclass_show');
+
+        // Edit route: show the form to edit an existing class
+        Route::get('/sclasses/edit/{id}', 'edit')->name('edit');
+
+        // Update route: handle form submission to update an existing class
+        Route::put('/sclasses/{id}/update', 'update')->name('update');
+
+        // Delete route: handle deletion of a specific class
+        Route::delete('/classes/delete/{id}', 'destroy')->name('sclass_delete');
     });
 });
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
