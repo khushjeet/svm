@@ -133,8 +133,6 @@ class TeacherController extends Controller
 
     public function update(UpdateTeacherRequest $request, string $id)
     {
-
-
     $teacher =  Teacher::findOrFail($id);
 
     $teacher->first_name = $request->first_name;

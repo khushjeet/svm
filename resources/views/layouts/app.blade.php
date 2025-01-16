@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Edumin - Bootstrap Admin Dashboard </title>
+    <title>Sarasawati Shishu Mandir Admin Dashboard </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/jqvmap/css/jqvmap.min.css') }}">
@@ -49,13 +47,14 @@
         <!--**********************************
             Nav header start
         ***********************************-->
+
         <div class="nav-header">
+
             <a href="index.html" class="brand-logo">
                 <img class="logo-abbr" src="{{ asset('frontend/img/svmlogo.png') }}" alt="">
                 <img class="logo-compact" src="{{ asset('frontend/img/svmlogo.png') }}" alt="">
                 <img class="brand-title" src="{{ asset('frontend/img/svmlogo.png') }}" alt="">
             </a>
-
             <div class="nav-control">
                 <div class="hamburger">
                     <span class="line"></span><span class="line"></span><span class="line"></span>
@@ -65,7 +64,6 @@
         <!--**********************************
             Nav header end
         ***********************************-->
-
         <!--**********************************
             Header start
         ***********************************-->
@@ -88,6 +86,7 @@
                         </div>
 
                         {{-- navigation bar start --}}
+
                         @include('layouts.navigation')
 
                         {{-- navigation bar end --}}
@@ -111,11 +110,13 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+
+                    {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                             <i class="la la-calendar"></i>
                             <span class="nav-text">Event Management</span>
                         </a>
-                    </li>
+                    </li> --}}
+
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-user"></i>
                             <span class="nav-text">Teachers</span>
@@ -130,8 +131,8 @@
                             <span class="nav-text">Students</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href=""> Students List</a></li>
-                            <li><a href="add-student.html">Admission Form</a></li>
+                            <li><a href="{{route('students.index')}}"> Students List</a></li>
+                            <li><a href="{{route('students.create')}}">Admission Form</a></li>
 
                         </ul>
                     </li>
@@ -145,27 +146,33 @@
                             <li><a href="">Add Time Table</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-book"></i>
-                            <span class="nav-text">Library</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-library.html">All Library</a></li>
-                            <li><a href="add-library.html">Add Library</a></li>
-                            <li><a href="edit-library.html">Edit Library</a></li>
-                        </ul>
-                    </li>
 
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="la la-users"></i>
-                            <span class="nav-text">Manage Staff</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="all-staff.html">Staffs</a></li>
-                            <li><a href="add-staff.html">Add Staff</a></li>
+                        <i class="la la-dollar"></i>
+                        <span class="nav-text">Fees</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="fees-collection.html">Fees Collection</a></li>
+                        <li><a href="add-fees.html">Add Fees</a></li>
+                        <li><a href="fees-receipt.html">Fees Receipt</a></li>
+                    </ul>
+                </li>
+                <li><a href="widget-basic.html" aria-expanded="false">
+                    <i class="la la-desktop"></i>
+                    <span class="nav-text">Website</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{route('sliderbar.sliderbar_index')}}">Slidebar And There Text</a></li>
 
-                        </ul>
-                    </li>
+                    <li><a href="add-fees.html"> School Facilities</a></li>
+                    <li><a href="fees-receipt.html">Administrative</a></li>
+                    <li><a href="fees-receipt.html">Popular Teacher</a></li>
+                    <li><a href="fees-receipt.html">Our Toppers</a></li>
+                    <li><a href="fees-receipt.html">About Us</a></li>
+                </ul>
+
+            </li>
+
                 </ul>
             </div>
         </div>
@@ -656,18 +663,6 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
 
     </div>
     <!--**********************************

@@ -12,6 +12,7 @@
 
 
         <!-- Carousel Start -->
+
         @include('frontend.layout.carousel')
         <!-- Carousel End -->
 
@@ -30,10 +31,10 @@
         <!-- About End -->
 
 
-        <!-- Call To Action Start -->
+        {{-- <!-- Call To Action Start -->
 
         @include('frontend.layout.call_action')
-        <!-- Call To Action End -->
+        <!-- Call To Action End --> --}}
 
 
 

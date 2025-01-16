@@ -1,5 +1,4 @@
 ﻿@extends('layouts.app')
-
 @section('content_one')
 <div class="content-body">
     <div class="container-fluid">
@@ -33,23 +32,14 @@
                     <div class="card-body">
                         <div class="row mb-5">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <h6 style="color: #FF9933;">From:</h6>
+                                <h6 style="color: #FF9933;">To:</h6>
                                 <div><strong>Saraswati Shishu Vidya Mandir</strong></div>
                                 <div>123 School Lane</div>
-                                <div>City, State, ZIP</div>
+                                <div>City, State ZIP</div>
                                 <div>Email: info@school.com</div>
-                                <div>Phone: +91 9876543210</div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-right">
-                                <h6 style="color: #FF9933;">To:</h6>
-                                <div><strong>Khushjeet</strong></div>
-                                <div>123 School Lane</div>
-                                <div>City, State, ZIP</div>
-                                <div>Email: info@school.com</div>
-                                <div>Phone: +91 9876543210</div>
+                                <div>Phone: +919876543210</div>
                             </div>
                         </div>
-
                         <div class="table-responsive-sm">
                             <table class="table table-striped">
                                 <thead>
@@ -69,7 +59,7 @@
                                         <td class="left">Monthly</td>
                                         <td class="right">#12345</td>
                                         <td class="center">01 Jan 2025</td>
-                                        <td class="right">$500</td>
+                                        <td class="right">₹500</td>
                                     </tr>
                                     <!-- Add more rows as needed -->
                                 </tbody>
@@ -83,7 +73,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="left"><strong>Total</strong></td>
-                                            <td class="right"><strong>$500</strong></td>
+                                            <td class="right"><strong>₹500</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
