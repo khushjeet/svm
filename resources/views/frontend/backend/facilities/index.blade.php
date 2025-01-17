@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content_one')
-<div class="container">
+<div class="container" style="width: 1000px; height: 1200px;">
     <h1>Manage Facilities</h1>
     <a href="{{ route('facilities.create') }}" class="btn btn-primary mb-3">Add Facility</a>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutSectionController;
 use App\Http\Controllers\AdmistrativeController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\FrontendView;
 use App\Http\Controllers\IDCardController;
 use App\Http\Controllers\NoticeBoardController;
@@ -12,6 +13,10 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\OurTopperController;
+use App\Http\Controllers\PopularTeacherController;
+use App\Http\Controllers\SchoolClassController;
 
 Route::get('/', function () {
     $sliders = Slider::get();
@@ -48,8 +53,9 @@ Route::controller(FrontendView::class)->name('bth.')->group(function () {
     Route::get('/call-to-action', 'call_to_action')->name('call_to_action');
 });
 
-use App\Http\Controllers\FacilityController;
-use App\Http\Controllers\SchoolClassController;
+//noticeboard
+Route::resource('/noticeboard', NoticeBoardController::class);
+
 
 Route::resource('/facilities', FacilityController::class);
 
@@ -62,6 +68,16 @@ Route::resource('/about_sections', AboutSectionController::class)->middleware('a
 //school sclasses
 
 Route::resource('/school_classes', SchoolClassController::class);
+
+//Appointment
+
+Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+
+//popular teacher
+Route::resource('/popular_teachers', PopularTeacherController::class)->middleware('auth');
+
+// topper routes
+Route::resource('/our_toppers', OurTopperController::class)->middleware('auth');
 
 //admin routes
 Route::middleware('auth')->group(function () {
@@ -142,30 +158,32 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::middleware('auth')->group(function () {
-    Route::controller(NoticeBoardController::class)->name('noticeboard.')->group(function () {
-        // Index route: display all sliderbar
-        Route::get('/noticeboard/index', 'index')->name('noticeboard_index');
+// Route::middleware('auth')->group(function () {
+//     Route::controller(NoticeBoardController::class)->name('noticeboard.')->group(function () {
+//         // Index route: display all sliderbar
+//         Route::get('/noticeboard/index', 'index')->name('noticeboard_index');
 
-        // Create route: show the form to create a new sliderbar
-        Route::get('/noticeboard_create', 'create')->name('noticeboard_create');
+//         // Create route: show the form to create a new sliderbar
+//         Route::get('/noticeboard_create', 'create')->name('noticeboard_create');
 
-        // Store route: handle form submission to create a new sliderbar
-        Route::post('/noticeboard/store', 'store')->name('noticeboard_store');
+//         // Store route: handle form submission to create a new sliderbar
+//         Route::post('/noticeboard/store', 'store')->name('noticeboard_store');
 
-        // Show route: display details of a specific sliderbar
-        Route::get('/noticeboard_show/{slider}', 'show')->name('noticeboard_show');
+//         // Show route: display details of a specific sliderbar
+//         Route::get('/noticeboard_show/{slider}', 'show')->name('noticeboard_show');
 
-        // Edit route: show the form to edit an existing sliderbar
-        Route::get('/noticeboard/edit/{id}', 'edit')->name('noticeboard_edit');
+//         // Edit route: show the form to edit an existing sliderbar
+//         Route::get('/noticeboard/edit/{id}', 'edit')->name('noticeboard_edit');
 
-        // Update route: handle form submission to update an existing sliderbar
-        Route::put('/noticeboard/{id}/update', 'update')->name('noticeboard_update');
+//         // Update route: handle form submission to update an existing sliderbar
+//         Route::put('/noticeboard/{id}/update', 'update')->name('noticeboard_update');
 
-        // Delete route: handle deletion of a specific sliderbar
-        Route::delete('/noticeboard/delete/{id}', 'destroy')->name('noticeboard_delete');
-    });
-});
+//         // Delete route: handle deletion of a specific sliderbar
+//         Route::delete('/noticeboard/delete/{id}', 'destroy')->name('noticeboard_delete');
+//     });
+// });
+
+
 
 
 

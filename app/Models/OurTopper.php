@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NoticeBoard extends Model
+class OurTopper extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['notice_board', 'link'];
+    protected $fillable = [
+        'name',
+        'profession',
+        'description',
+        'image_path',
+    ];
 }

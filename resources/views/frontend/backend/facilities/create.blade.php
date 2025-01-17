@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content_one')
-<div class="container">
+<div class="container" style="width: 1000px; height: 1200px;">
     <h1>Create Facility</h1>
 
     @if ($errors->any())

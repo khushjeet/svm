@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content_one')
-    <div class="container py-5">
+<div class="container" style="width: 1000px; height: 1200px;">
         <h1>Edit Facility</h1>
 
         <!-- Success/Error Messages -->

@@ -10,9 +10,9 @@
         <!-- Navbar End -->
 
 
-        <!-- About Start -->
-    @include('frontend.layout.appointment')
-        <!-- About End -->
+        <!-- Appointment Start -->
+        @include('frontend.layout.appointment')
+        <!-- Appointment End -->
 
         <!-- Footer Start -->
         @include('frontend.layout.footer')

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Sarasawati Shishu Mandir Admin Dashboard </title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/svmlogo.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/jqvmap/css/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/css/chartist.min.css') }}">
     <!-- Summernote -->
@@ -143,7 +143,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('sclass.sclass_index')}}">View All Class</a></li>
                             <li><a href="{{route('sclass.sclass_create')}}">Add New Class</a></li>
-                            <li><a href="">Add Time Table</a></li>
+                            {{-- <li><a href="">Add Time Table</a></li> --}}
                         </ul>
                     </li>
 
@@ -164,11 +164,14 @@
                 <ul aria-expanded="false">
                     <li><a href="{{route('sliderbar.sliderbar_index')}}">Slidebar And There Text</a></li>
 
-                    <li><a href="add-fees.html"> School Facilities</a></li>
-                    <li><a href="fees-receipt.html">Administrative</a></li>
-                    <li><a href="fees-receipt.html">Popular Teacher</a></li>
-                    <li><a href="fees-receipt.html">Our Toppers</a></li>
-                    <li><a href="fees-receipt.html">About Us</a></li>
+                    <li><a href="{{route("facilities.index")}}"> School Facilities</a></li>
+                    <li><a href="{{route("school_classes.index")}}"> Classes</a></li>
+                    <li><a href="{{route("noticeboard.index")}}"> Noticeboard</a></li>
+
+                    <li><a href="{{route('admistratives.index')}}">Administrative</a></li>
+                    <li><a href="{{route('popular_teachers.index')}}">Popular Teacher</a></li>
+                    <li><a href="{{route('our_toppers.index')}}">Our Toppers</a></li>
+                    <li><a href="{{route('about_sections.index')}}">About Us</a></li>
                 </ul>
 
             </li>
